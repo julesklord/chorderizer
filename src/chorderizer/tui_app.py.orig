@@ -201,13 +201,7 @@ class ChorderizerApp(App):
                     yield RadioButton("1st")
                     yield RadioButton("2nd")
                     yield RadioButton("3rd")
-                yield Button(
-                    "EXPORT MIDI",
-                    variant="primary",
-                    id="btn-export",
-                    classes="mt-2",
-                    tooltip="Export current progression to a MIDI file",
-                )
+                yield Button("EXPORT MIDI", variant="primary", id="btn-export", classes="mt-2")
 
             with Vertical(id="center-col"):
                 yield PianoWidget(id="piano")
@@ -349,10 +343,6 @@ class ChorderizerApp(App):
             )
         except Exception as e:
             self.log_status(f"[red]Error: {e}[/red]", "THEORY ERROR")
-
-    def on_button_pressed(self, event: Button.Pressed) -> None:
-        if event.button.id == "btn-export":
-            self.action_export_midi()
 
 
 if __name__ == "__main__":

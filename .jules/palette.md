@@ -1,0 +1,3 @@
+## 2024-05-01 - Missing Button Handler Pattern
+**Learning:** Found a button ("EXPORT MIDI") in the Textual TUI app (`tui_app.py`) that had no corresponding `on_button_pressed` event handler. The action was only reachable via a keyboard shortcut `E`, causing silent failures when users actually clicked the button. Also discovered a `KeyError` bug in the generator preventing the export action from completing successfully due to spanish vs english dict keys.
+**Action:** Always verify that interactive visual elements like buttons have their corresponding event handlers (e.g. `on_button_pressed`) wired up to their logical actions. Added tooltip for discoverability. Add `.get()` with fallbacks to avoid crashes from mismatched key names.

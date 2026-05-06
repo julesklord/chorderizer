@@ -1,0 +1,11 @@
+--- generators.py
++++ generators.py
+@@ -549,7 +549,7 @@
+             if use_voice_leading and prev_chord_midi is not None:
+                 chord_midi_notes = VoiceLeader.apply(prev_chord_midi, chord_midi_notes)
+
+-            chord_duration_beats = chord_data["duracion_beats"]
++            chord_duration_beats = chord_data.get("duracion_beats", chord_data.get("duration_beats", 4.0))
+             duration_ticks = int(chord_duration_beats * ticks_per_beat)
+
+             base_vel = midi_options.get("base_velocity", 85)
