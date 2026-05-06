@@ -1,4 +1,3 @@
-
-## 2024-05-18 - Discovering Accessibility Power in Textual TUIs
-**Learning:** Textual TUI applications inherently lack standard web-like hover affordances for accessibility, making complex panels like the Chorderizer dashboard potentially difficult to parse for screen reader users or new users. However, we discovered that `tooltip` attributes are a powerful, universally supported prop across Textual interactive widgets (`Select`, `RadioSet`, `Button`, `DataTable`), providing vital contextual guidance.
-**Action:** Always leverage `tooltip` attributes on interactive elements in TUI dashboard layouts to provide inline assistance, especially for domain-specific controls (like musical theory selections) where the UI layout must remain compact.
+## 2024-11-20 - Destructive Action Feedback
+**Learning:** Implementing double-press confirmation for destructive actions (like clearing progress) prevents accidental data loss without adding cumbersome modal dialogs, which is a great pattern for keyboard-centric TUIs like Textual.
+**Action:** Use time-deltas on consecutive keypresses for confirmations in keyboard-driven interfaces.

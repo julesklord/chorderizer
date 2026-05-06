@@ -5,6 +5,7 @@ tui_app.py — Premium Harmony Station Dashboard
 import json
 import logging
 import os
+import time
 import traceback
 from datetime import datetime
 from pathlib import Path
@@ -510,6 +511,7 @@ class ChorderizerApp(App):
         self.tonic_pc = 0
         self.selected_row_data = None
         self.exit_requested_at = 0.0
+        self.clear_requested_at = 0.0
 
     def compose(self) -> ComposeResult:
         yield Header()
@@ -820,8 +822,6 @@ class ChorderizerApp(App):
 
     def action_quit(self) -> None:
         """Custom quit logic with double-press confirmation."""
-        import time
-
         now = time.time()
         if now - self.exit_requested_at < 2.0:
             self.exit()
@@ -866,10 +866,20 @@ class ChorderizerApp(App):
             )
 
     def action_clear_progression(self) -> None:
-        self.query_one("#progression-sidebar", ProgressionPanel).clear_prog()
-        self.log_status(
-            Translations.t("status_list_reset"), "COMPOSER", icon=IconManager.get("broom")
-        )
+        now = time.time()
+        if now - self.clear_requested_at < 2.0:
+            self.query_one("#progression-sidebar", ProgressionPanel).clear_prog()
+            self.log_status(
+                Translations.t("status_list_reset"), "COMPOSER", icon=IconManager.get("broom")
+            )
+        else:
+            self.clear_requested_at = now
+            self.log_status(
+                Translations.t("confirm_clear"),
+                "CLEAR",
+                icon=IconManager.get("warn"),
+            )
+            self.notify(Translations.t("confirm_clear").replace("[bold yellow]", "").replace("[/bold yellow]", ""), severity="warning")
 
     def action_export_midi(self) -> None:
         prog_panel = self.query_one("#progression-sidebar", ProgressionPanel)
