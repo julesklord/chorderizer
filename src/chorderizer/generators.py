@@ -512,7 +512,7 @@ class MidiGenerator:
         try:
             output_directory = os.path.dirname(output_filename)
             if output_directory and not os.path.exists(output_directory):
-                os.makedirs(output_directory, exist_ok=True)
+                os.makedirs(output_directory, mode=0o700, exist_ok=True)
                 print(f"{Fore.GREEN}Directory '{output_directory}' created.{Style.RESET_ALL}")
             midi_file.save(output_filename)
             print(

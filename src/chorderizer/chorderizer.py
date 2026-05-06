@@ -238,7 +238,7 @@ def _phase4_midi_export(
     # Create output directory if needed
     out_dir = os.path.dirname(out_path)
     if out_dir and not os.path.exists(out_dir):
-        os.makedirs(out_dir, exist_ok=True)
+        os.makedirs(out_dir, mode=0o700, exist_ok=True)
 
     midi_builder.generate_midi_file(chords_for_midi, out_path, midi_opts)
     render_success(f"MIDI saved → {out_path}")

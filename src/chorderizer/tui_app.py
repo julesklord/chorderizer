@@ -883,7 +883,7 @@ class ChorderizerApp(App):
         home = os.path.expanduser("~")
         export_dir = os.path.join(home, "chord_generator_midi_exports")
         if not os.path.exists(export_dir):
-            os.makedirs(export_dir)
+            os.makedirs(export_dir, mode=0o700)
 
         # Add timestamp to avoid collisions
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
